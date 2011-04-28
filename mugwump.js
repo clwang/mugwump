@@ -1,7 +1,6 @@
 /*jslint white: true, onevar: true, undef: true, nomen: true, regexp: true, plusplus: true, bitwise: true, newcap: true, maxerr: 50, indent: 4 */
 var counter = 0,
     found = [false, false, false, false],
-    mugs_found = 0,
     results_msg = "",
     mugs = [];
 
@@ -84,21 +83,30 @@ function input() {
   if (counter === 10) {
     alert('Game Over! Click start to play a new game');
   } else {
+    results_msg = "";
     results = find_mugwump(x,y);
     display_results(results);
     counter += 1;
-    check_winner();
+    check_winner(results);
   }
   
 }
 
-function check_winner() {
+function check_winner(results) {
+  // find the number of mugs found
+  var i = 0,
+      mugs_found = 0;
+  for (; i < 4; i += 1) {
+      if (results.found_result[i] === true) {
+          mugs_found += 1;
+      }
+  }
   // Winner conditions
   if (mugs_found === 4) {
       alert("You found all the mugwumps");
       results_msg = "You got them all in " + counter + " turns!</br>"  + "THAT WAS FUN! LET'S PLAY AGAIN.......<br />FOUR MORE MUGWUMPS ARE NOW IN HIDING."
       print_message(results_msg);
-      $('#xval, #yval').attr('disabled', false);
+      $('#xval, #yval').attr('disabled', true);
   }
 
   // Loser conditions
@@ -108,14 +116,13 @@ function check_winner() {
           results_msg += "MUGWUMP " + (i + 1) + " is at (" + mugs.pos_x + "," + mugs.pos_y + ")!<br />THAT WAS FUN! LET'S PLAY AGAIN.......<br />FOUR MORE MUGWUMPS ARE NOW IN HIDING.";
       }
       print_message(results_msg);
-      $('#xval, #yval').attr('disabled', false);    
+      $('#xval, #yval').attr('disabled', true);    
   }
 }
 
 function reset_game() {
       counter = 0;
       found = [false, false, false, false];
-      mugs_found = 0;
       results_msg = "";
       mugs = [];
       clear_board(true);
@@ -127,14 +134,14 @@ function reset_game() {
 
 function print_message(message) {
   $('#message_box').empty();
-  $('#message_box').html(message);
+  var formatted_msg = '<p>' + message + '</p>'; 
+  $('#message_box').append(formatted_msg);
 }
 
 function display_results() {
   var i = 0;
   for (; i < 4; i += 1) {
       if (results.found_result[i] === true) {
-          mugs_found += 1;
           results_msg += "YOU HAVE FOUND MUGWUMP " + (i + 1) + "<br />";
       } else {
           results_msg += "You are " + results.diff_result[i] + " units from mugwamp " + (i + 1) + "<br />";
