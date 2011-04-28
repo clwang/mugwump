@@ -3,47 +3,204 @@
 <meta charset="utf-8" />
 <head>
   <title>Mugwump</title>
+  <script type="text/javascript" src="scripts/jquery-1.5.2.min.js"></script>
   <script type="text/javascript" src="mugwump.js"></script>
-  <link rel="stylesheet" href="/css/mugwump.css" type="text/css" media="screen">
+  <script>
+    $(document).ready(function() {
+      $('#xval, #yval').attr('disabled', true);
+      $('#start').click(function(){
+        main();
+      });
+      
+      $('#submit').click(function(){
+        input();
+      });
+    });
+  </script> 
+  <link rel="stylesheet" href="css/mugwump.css" type="text/css" media="screen">
 </head>
 <body>
-   <table>
-     <tr>
-       <td></td>
-       <td></td>
-       <td></td>
-       <td></td>
-       <td></td>
-       <td></td>
-       <td></td>
-       <td></td>
-       <td></td>
-       <td></td>
-     </tr>
-     <tr>
-       <td></td>
-       <td></td>
-       <td></td>
-       <td></td>
-       <td></td>
-       <td></td>
-       <td></td>
-       <td></td>
-       <td></td>
-       <td></td>
-     </tr>
-     <tr>
-       <td></td>
-       <td></td>
-       <td></td>
-       <td></td>
-       <td></td>
-       <td></td>
-       <td></td>
-       <td></td>
-       <td></td>
-       <td></td>
-     </tr>
-   </table>
+  <div id="main_wrapper">
+    <h1>Mugwump</h1> <br />
+    <div id="intro">
+      <p>CREATIVE COMPUTING  MORRISTOWN, NEW JERSEY</p> <br />
+      <p>THE OBJECT OF THIS GAME IS TO FIND FOUR MUGWUMPS HIDDEN ON A 10 BY 10 GRID. HOMEBASE IS POSITION 0,0. ANY GUESS YOU MAKE MUST BE TWO NUMBERS WITH EACH NUMBER BETWEEN 0 AND 9, INCLUSIVE. FIRST NUMBER IS DISTANCE TO RIGHT OF HOMEBASE AND SECOND NUMBER IS DISTANCE ABOVE HOMEBASE.</p>
+    </div>
+
+
+    <div id="game_container">
+      <div id="y_axis">
+        <ul>
+          <li>9</li>
+          <li>8</li>
+          <li>7</li>
+          <li>6</li>
+          <li>5</li>
+          <li>4</li>
+          <li>3</li>
+          <li>2</li>
+          <li>1</li>
+          <li>0</li>
+        </ul>
+      </div>
+      <div id="game_table">
+        <table>
+           <tr id="row9">
+             <td></td>
+             <td></td>
+             <td></td>
+             <td></td>
+             <td></td>
+             <td></td>
+             <td></td>
+             <td></td>
+             <td></td>
+             <td></td>
+           </tr>
+           <tr id="row8">
+             <td></td>
+             <td></td>
+             <td></td>
+             <td></td>
+             <td></td>
+             <td></td>
+             <td></td>
+             <td></td>
+             <td></td>
+             <td></td>
+           </tr>
+           <tr id="row7">
+             <td></td>
+             <td></td>
+             <td></td>
+             <td></td>
+             <td></td>
+             <td></td>
+             <td></td>
+             <td></td>
+             <td></td>
+             <td></td>
+           </tr>
+           <tr id="row6">
+             <td></td>
+             <td></td>
+             <td></td>
+             <td></td>
+             <td></td>
+             <td></td>
+             <td></td>
+             <td></td>
+             <td></td>
+             <td></td>
+           </tr>
+           <tr id="row5">
+             <td></td>
+             <td></td>
+             <td></td>
+             <td></td>
+             <td></td>
+             <td></td>
+             <td></td>
+             <td></td>
+             <td></td>
+             <td></td>
+           </tr>
+           <tr id="row4">
+             <td></td>
+             <td></td>
+             <td></td>
+             <td></td>
+             <td></td>
+             <td></td>
+             <td></td>
+             <td></td>
+             <td></td>
+             <td></td>
+           </tr>
+           <tr id="row3">
+             <td></td>
+             <td></td>
+             <td></td>
+             <td></td>
+             <td></td>
+             <td></td>
+             <td></td>
+             <td></td>
+             <td></td>
+             <td></td>
+           </tr>
+           <tr id="row2">
+             <td></td>
+             <td></td>
+             <td></td>
+             <td></td>
+             <td></td>
+             <td></td>
+             <td></td>
+             <td></td>
+             <td></td>
+             <td></td>
+           </tr>
+           <tr id="row1">
+             <td></td>
+             <td></td>
+             <td></td>
+             <td></td>
+             <td></td>
+             <td></td>
+             <td></td>
+             <td></td>
+             <td></td>
+             <td></td>
+           </tr>
+           <tr id="row0">
+             <td></td>
+             <td></td>
+             <td></td>
+             <td></td>
+             <td></td>
+             <td></td>
+             <td></td>
+             <td></td>
+             <td></td>
+             <td></td>
+           </tr>
+         </table>
+      </div>
+
+       <div id="side_wrapper">
+         <div id="message_box">
+
+         </div>
+         <div id="form_cont">
+              X - Value:<input type="text" id="xval" name="x_val" value=""><br />
+              Y - Value:<input type="text" id="yval" name="y_val" value=""><br />
+              <div>
+                <input type="button" id="start" value="Start a new game">
+                <input type="submit" id="submit" value="Guess">
+              </div>
+            
+          </div>
+       </div>
+
+    </div>
+
+    <div class="clear"></div>
+    <div id="x_axis">
+      <ul>
+        <li>0</li>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+        <li>6</li>
+        <li>7</li>
+        <li>8</li>
+        <li>9</li>
+      </ul>
+    </div>
+  </div>
+   
 </body>
 </html>
